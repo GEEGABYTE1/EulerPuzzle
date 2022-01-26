@@ -121,9 +121,15 @@ class Solution:
         columns = [[] for i in range(len(matrix))]
 
         counter = 0
-        for i in range(len(self.matrix)):
-            for col in self.matrix[i]:
-                columns[i].append(col)
+        for j in range(len(self.matrix)):
+            for i in range(len(self.matrix)):
+                for col in self.matrix[counter]:
+                    columns[j].append(col)
+                    break 
+                continue
+            counter += 1
+        
+        return columns
 
         
                         
