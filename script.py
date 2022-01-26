@@ -58,10 +58,9 @@ class Solution:
             if term == 0:
                 continue 
             else:
-                for peice_color in range(len(self.lst_setup)):
                     current_row = self.matrix[term]
                     prev_row = self.matrix[term - 1] 
-                    current_set_of_peices = self.lst_setup[peice_color]
+                    current_set_of_peices = self.lst_setup[term - 1]
                     self.ref_peices = current_set_of_peices[:]
 
                     for idx_matrix in range(len(current_row)):
@@ -78,6 +77,9 @@ class Solution:
                         row_information = self.fetch_row_peices(current_row)
                         current_row_peices = row_information[0]
                         current_row_colours = row_information[-1]
+
+                        updated_peice = current_peice
+                        updated_colour = current_colour
                         
 
                         if upper_colour == current_colour and upper_peice == current_peice:
@@ -115,33 +117,33 @@ class Solution:
                                 current_set_of_peices[idx_matrix][current_peice] = new_peice_colour
                                 current_row[idx_matrix] = {current_peice:new_peice_colour}
                                 continue
-
-                        elif current_colour in col_colours or current_colour in current_row_colours:
-                            counter = 0 
-                            while current_colour in col_colours or current_colour in current_row_colours:
-                                new_colour = colours[counter]
-                                if new_colour not in col_colours and new_colour not in current_row_colours:
-                                    break 
-                                else:
-                                    counter += 1
-                            
-                            current_set_of_peices[idx_matrix][current_peice] = new_colour
-                            current_row[idx_matrix] = {current_peice:new_colour}
-
-                        elif current_peice in col_peices or current_peice in current_row_peices:
-                            counter = 0 
-                            while current_peice in current_row_peices or current_peice in col_peices:
-                                new_peice = self.peices[counter]
-                                if new_peice not in current_row_peices and new_peice not in col_peices:
-                                    break 
-                                else:
-                                    counter += 1
-                            
-                            list(current_set_of_peices[idx_matrix].keys())[0] = new_peice
-                            current_row[idx_matrix] = {new_peice:current_colour}
-                        
                         else:
-                            continue
+                            if current_colour in col_colours or current_colour in current_row_colours:
+                                counter = -1 
+                                while current_colour in col_colours or current_colour in current_row_colours:
+                                    new_colour = colours[counter]
+                                    if new_colour not in col_colours and new_colour not in current_row_colours:
+                                        break 
+                                    else:
+                                        counter += 1
+                                
+                                updated_colour = new_colour
+                                
+
+                            if current_peice in col_peices or current_peice in current_row_peices:
+                                counter = -1
+                                while current_peice in current_row_peices or current_peice in col_peices:
+                                    new_peice = self.peices[counter]
+                                    if new_peice not in current_row_peices and new_peice not in col_peices:
+                                        break 
+                                    else:
+                                        counter += 1
+                                
+                                updated_peice = new_peice
+                            
+                            current_row[idx_matrix] = {updated_peice:updated_colour}
+                        
+                        
 
                             
                         
@@ -159,15 +161,16 @@ class Solution:
     
         return peices, colours
 
-    def fetch_coloumn_peices(self, matrix=matrix):
+    def fetch_coloumn_peices(self, matrix=matrix):                  # Fix this
         columns = [[] for i in range(len(matrix))]
         colours = [[] for i in range(len(matrix))]
         peices = [[] for i in range(len(matrix))]
 
-        counter = 0
+        
         for j in range(len(self.matrix)):
+            counter = 0
             for i in range(len(self.matrix)):
-                for col in self.matrix[i]:
+                for col in self.matrix[counter]:
                     if type(col) == dict:
                         colours[j].append(list(col.values())[0])
                         peices[j].append(list(col.keys())[0])
@@ -175,8 +178,7 @@ class Solution:
                         colours[j].append(col)
                         peices[j].append(col)
                     break 
-                continue
-            counter += 1
+                counter += 1
         
         return peices, colours
 
