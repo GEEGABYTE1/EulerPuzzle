@@ -42,7 +42,14 @@ class Solution:
     for i in range(num_peices):
         lst_setup.append(colored_peices[0])
     
-    
+    initial_perm = lst_setup[0]
+    for row in matrix:
+        for element in range(len(row)):
+            row[element] = initial_perm[element]
+        break
+
+        
+        
 
 test = Solution()
 print(test)    
