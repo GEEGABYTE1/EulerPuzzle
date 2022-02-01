@@ -95,7 +95,7 @@ class Solution:
                                     counter = -1
                                     while acc_peice in current_row_peices:
                                          
-                                        acc_peice = self.peices[counter]
+                                        acc_peice = random.choice(self.peices)
                                         if acc_peice not in current_row_peices and acc_peice not in col_peices:
                                             break 
                                         else:
@@ -109,7 +109,7 @@ class Solution:
                                 counter = 0 
                                 while new_peice_colour in current_row_colours:
                                     
-                                    new_peice_colour = colours[counter]
+                                    new_peice_colour = random.choice(colours)
                                     if new_peice_colour not in current_row_colours and new_peice_colour not in col_colours:
                                         break 
                                     else:
@@ -122,7 +122,7 @@ class Solution:
                             if current_colour in col_colours or current_colour in current_row_colours:
                                 counter = -1 
                                 while current_colour in col_colours or current_colour in current_row_colours:
-                                    new_colour = colours[counter]
+                                    new_colour = random.choice(colours)
                                     if new_colour not in col_colours and new_colour not in current_row_colours:
                                         break 
                                     else:
@@ -130,19 +130,30 @@ class Solution:
                                 
                                 updated_colour = new_colour
                                 
-
+                            iterations = 0
+                            counter = 0
                             if current_peice in col_peices or current_peice in current_row_peices:
-                                counter = -1
                                 while current_peice in current_row_peices or current_peice in col_peices:
                                     new_peice = random.choice(self.peices)
-                                    if new_peice not in current_row_peices and new_peice not in col_peices:
-                                        break 
-                                    else:
-                                        counter += 1
-                                
+                                    if iterations > len(self.matrix):
+                                        # Fix
+                                        pass
+                                        
+                                            
+                                    else:      
+                                        if new_peice not in current_row_peices and new_peice not in col_peices:
+                                            break 
+                                        else:
+                                            iterations += 1
+                                            
+
+                                    
                                 updated_peice = new_peice
-                            
-                            current_row[idx_matrix] = {updated_peice:updated_colour}
+                                
+                                current_row[idx_matrix] = {updated_peice:updated_colour}
+                                continue
+        
+        return self.grid_info
                         
                         
 
@@ -162,7 +173,7 @@ class Solution:
     
         return peices, colours
 
-    def fetch_coloumn_peices(self, matrix=matrix):                  # Fix this
+    def fetch_coloumn_peices(self, matrix=matrix):                  
         columns = [[] for i in range(len(matrix))]
         colours = [[] for i in range(len(matrix))]
         peices = [[] for i in range(len(matrix))]
@@ -189,6 +200,16 @@ class Solution:
 
         
         return peices,colours
+    
+    def linear_search(self, row, value):
+        for i in range(len(row)):
+            if row[i] == value:
+                return i
+
+    def search_new_peice_replacement(self, original_col, peices):
+        for peice in self.peices:
+            if not peice in original_col:
+                return peice
 
 
 
