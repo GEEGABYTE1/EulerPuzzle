@@ -254,7 +254,6 @@ def sort(lst):
 
 
 grid = grid[0]
-grid = grid[:3]
 for lst in grid:
     print(lst)
     
