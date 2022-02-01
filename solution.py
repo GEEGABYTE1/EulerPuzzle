@@ -6,7 +6,7 @@
 def solution():
 
     colours = ['red', 'blue', 'yellow', 'orange', 'pink', 'green', 'violet']
-    size_input = int(input("How big of a board would you like to solve (max 6x6): " ))
+    size_input = int(input("How big of a board would you like to solve (5x5 - 6x6): " ))
     colours = colours[:size_input]
     peices = [i for i in range(size_input)]
 
