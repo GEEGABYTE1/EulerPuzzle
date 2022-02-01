@@ -1,5 +1,6 @@
 ### Current Alg will only run 6 
 from termcolor import colored 
+import random
 
 colours = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 
@@ -133,7 +134,7 @@ class Solution:
                             if current_peice in col_peices or current_peice in current_row_peices:
                                 counter = -1
                                 while current_peice in current_row_peices or current_peice in col_peices:
-                                    new_peice = self.peices[counter]
+                                    new_peice = random.choice(self.peices)
                                     if new_peice not in current_row_peices and new_peice not in col_peices:
                                         break 
                                     else:
@@ -187,7 +188,7 @@ class Solution:
             index_number += 1
 
         
-        return colours, peices
+        return peices,colours
 
 
 
