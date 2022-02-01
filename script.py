@@ -167,20 +167,25 @@ class Solution:
         peices = [[] for i in range(len(matrix))]
 
         
-        for j in range(len(self.matrix)):
-            counter = 0
-            for i in range(len(self.matrix)):
-                for col in self.matrix[counter]:
-                    if type(col) == dict:
-                        colours[j].append(list(col.values())[0])
-                        peices[j].append(list(col.keys())[0])
-                    else:
-                        colours[j].append(col)
-                        peices[j].append(col)
-                    break 
-                counter += 1
-        
-        return peices, colours
+        index_number = 0
+        row_number = 0
+        for row in range(len(self.matrix)):
+            for couter in range(len(self.matrix)):
+                total_peice = self.matrix[row_number][index_number]
+                colour = list(total_peice.values())[0]
+                peice = list(total_peice.keys())[0]
+                colours[index_number].append(colour)
+                peices[index_number].append(peice)
+
+                row_number += 1
+            
+            index_number += 1
+
+
+
+            
+
+            
 
         
                         
