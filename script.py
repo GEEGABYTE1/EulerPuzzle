@@ -1,6 +1,10 @@
 ### Current Alg will only run 6 
 from termcolor import colored 
 import random
+from heap import heapPermutation
+from heap import resulting_lst
+
+
 
 colours = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 
@@ -24,6 +28,7 @@ class Solution:
     grid_info = grid_info.build()
     matrix = grid_info[0]
     num_peices = grid_info[-1]
+    resulting_perms = []
 
     peices = [] 
     for i in range(num_peices):
@@ -55,6 +60,7 @@ class Solution:
 
     
     def algorithm(self):
+        heap = None
         for term in range(len(self.matrix)):
             if term == 0:
                 continue 
@@ -135,16 +141,12 @@ class Solution:
                             if current_peice in col_peices or current_peice in current_row_peices:
                                 while current_peice in current_row_peices or current_peice in col_peices:
                                     new_peice = random.choice(self.peices)
-                                    if iterations > len(self.matrix):
-                                        # Fix
-                                        pass
-                                        
-                                            
-                                    else:      
-                                        if new_peice not in current_row_peices and new_peice not in col_peices:
-                                            break 
-                                        else:
-                                            iterations += 1
+                                                                             
+                                       
+                                    if new_peice not in current_row_peices and new_peice not in col_peices:
+                                        break 
+                                    else:
+                                        iterations += 1
                                             
 
                                     
@@ -152,11 +154,18 @@ class Solution:
                                 
                                 current_row[idx_matrix] = {updated_peice:updated_colour}
                                 continue
-        
-        return self.grid_info
-                        
+
+
                         
 
+
+
+            
+        
+        return self.grid_info
+    
+    
+                        
                             
                         
                 
