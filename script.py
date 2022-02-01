@@ -168,14 +168,19 @@ class Solution:
 
         
         index_number = 0
-        row_number = 0
+        
         for row in range(len(self.matrix)):
+            row_number = 0
             for couter in range(len(self.matrix)):
                 total_peice = self.matrix[row_number][index_number]
-                colour = list(total_peice.values())[0]
-                peice = list(total_peice.keys())[0]
-                colours[index_number].append(colour)
-                peices[index_number].append(peice)
+                if type(total_peice) == dict:
+                    colour = list(total_peice.values())[0]
+                    peice = list(total_peice.keys())[0]
+                    colours[index_number].append(colour)
+                    peices[index_number].append(peice)
+                else:
+                    colours[index_number].append(total_peice)
+                    peices[index_number].append(total_peice)
 
                 row_number += 1
             
