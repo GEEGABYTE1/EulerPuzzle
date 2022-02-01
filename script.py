@@ -1,8 +1,7 @@
 ### Current Alg will only run 6 
 from termcolor import colored 
 import random
-from heap import heapPermutation
-from heap import resulting_lst
+
 
 
 
