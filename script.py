@@ -186,6 +186,9 @@ class Solution:
             
             index_number += 1
 
+        
+        return colours, peices
+
 
 
             
